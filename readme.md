@@ -51,7 +51,7 @@ The application is very easy and self explanatory, you basically have 3 API POST
 
 <p>
 
-**DocHistory** This method create a report of all the processing events that occurred on a document after its firts upload. You just need to fill a single string parameter with the document UniqueID. Please enclose the id in double quotes, e.g. "doc4232" 
+**DocHistory** This method create a report of all the processing events that occurred on a document since its firts upload. You just need to fill a single string parameter with the document UniqueID. Please enclose the id in double quotes, e.g. "doc4232" 
 </p>
 
 <p>
