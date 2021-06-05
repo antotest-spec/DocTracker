@@ -1,0 +1,56 @@
+{
+   "entries": [
+      {
+         "eventType": "upload",
+         "uniqueID": "doc1",
+         "externalID": "edoc1",
+         "uploadName": "mydoc1",
+         "uploadCategory": "sales",
+         "uploadSize": 54
+      },
+      {
+         "eventType": "processing",
+         "uniqueID": "doc1",
+         "processingType": "Protocoling",
+         "processingTimeInSeconds": 1,
+         "processingResultDescr": "protocol number 567 was assigned"
+      },
+      {
+         "eventType": "processing",
+         "uniqueID": "doc1",
+         "processingType": "Archiving",
+         "processingTimeInSeconds": 3,
+         "processingResultDescr": "doc1 was archived in its proper slot"
+      },
+      {
+         "eventType": "processing",
+         "uniqueID": "doc1",
+         "processingType": "Digital signature",
+         "processingTimeInSeconds": 5,
+         "processingResultDescr": "The signature hash is Y2lhbyBjaWFv"
+      },
+      {
+         "eventType": "upload",
+         "uniqueID": "doc2",
+         "externalID": "edoc2",
+         "uploadName": "mydoc2",
+         "uploadCategory": "accounting",
+         "uploadSize": 78
+      },
+      {
+         "eventType": "processing",
+         "uniqueID": "doc2",
+         "processingType": "Digital signature",
+         "processingTimeInSeconds": 5,
+         "processingResultDescr": "The signature hash is TalyybgyBjaWFv"
+      },
+      {
+         "eventType": "upload",
+         "uniqueID": "doc3",
+         "externalID": "edoc3",
+         "uploadName": "mydoc3",
+         "uploadCategory": "sales",
+         "uploadSize": 78
+      }
+   ]
+}

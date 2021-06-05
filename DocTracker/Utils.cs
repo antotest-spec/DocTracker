@@ -51,14 +51,13 @@ namespace DocTracker {
       }
 
 
-
-
    }
 
    public static class MyExtensions {
-      public static string InverseTicks(this DateTime mytime) {
-         return (DateTime.MaxValue.Ticks - mytime.Ticks).ToString();
+      public static long ReverseTicks(this DateTime mytime) {
+         return DateTime.MaxValue.Ticks - mytime.Ticks;
       }
+
    }
 
 }
