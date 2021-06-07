@@ -66,9 +66,11 @@ namespace DocTracker {
    }
 
    public class UploadsReportResult {
-      public UploadsReportCategoryResult[] categories { get; set; }
+      public int NumCategories { get; set; }
+      public string[] CategoryNames { get; set; }
       public int NumDocumentsInAllCategories { get; set; }
       public Int64 TotalSizeInAllCategories { get; set; }
+      public UploadsReportCategoryResult[] CategoriesDetails { get; set; }
    }
 
    // constants hardcoded in the sources and used across multiple controllers

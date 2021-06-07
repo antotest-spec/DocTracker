@@ -39,6 +39,13 @@ namespace DocTracker.Controllers {
       }
       */
 
+      /// <summary>
+      /// Creates a report with all the operations performed on a document
+      /// </summary>
+      /// <remarks>
+      /// You just need to enter the UniqueID in the request body. <br /> 
+      /// Please enclose the ID in double quotes, e.g. "Doc432a"
+      /// </remarks>
       // POST api/<DocHistoryController>
       [HttpPost]
       public IActionResult Post([FromBody] string UniqueID) {

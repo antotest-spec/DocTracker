@@ -40,6 +40,15 @@ namespace DocTracker.Controllers {
       }
       */
 
+      /// <summary>
+      /// Creates a report of the latest uploads 
+      /// </summary>
+      /// <remarks>
+      /// Latest can be intended both as:<br />
+      /// latest "X" documents uploaded or<br/>
+      /// documents uploaded in the latest "X" seconds. <br/>
+      /// Enter proper values in the request body to achieve one or another behaviour
+      /// </remarks>
       // POST api/<UploadsReportController>
       [HttpPost]
       public IActionResult Post([FromBody] UploadsReportBody body) {
@@ -72,23 +81,27 @@ namespace DocTracker.Controllers {
                .Take((int)body.HowMany);
             qresult = mytable.ExecuteQuery(myquery.AsTableQuery()).ToList();
          }
-         // let's group results by category
-         var cat_result = qresult.GroupBy(x => x.UploadCategory);
+         // let's group results by category and project each category in UploadsReportCategoryResult format
+         var cat_result = qresult
+            .GroupBy(x => x.UploadCategory)
+            .Select(g => new UploadsReportCategoryResult {
+               Category = g.Key,
+               entries = g.ToArray(),
+               NumDocumentsInThisCategory = g.Count(),
+               TotalSizeInThisCategory = g.Sum(e => e.UploadSize)
+            }).ToArray();
          // now we fill the final report fields
-         var report = new UploadsReportResult();
-         report.categories = new UploadsReportCategoryResult[cat_result.Count()];
-         int cont_cat = 0;
-         foreach(var cur_category in cat_result) {
-            report.categories[cont_cat] = new UploadsReportCategoryResult();
-            report.categories[cont_cat].Category = cur_category.Key;
-            report.categories[cont_cat].NumDocumentsInThisCategory = cur_category.Count();
-            report.categories[cont_cat].entries = cur_category.ToArray();
-            report.categories[cont_cat++].TotalSizeInThisCategory = cur_category.Sum(e => e.UploadSize);
-         }
-         report.NumDocumentsInAllCategories = report.categories.Sum(cat => cat.NumDocumentsInThisCategory);
-         report.TotalSizeInAllCategories = report.categories.Sum(cat => cat.TotalSizeInThisCategory);
+         var report = new UploadsReportResult {
+            CategoriesDetails = cat_result,
+            NumCategories = cat_result.Length,
+            CategoryNames = cat_result.Select(g => g.Category).ToArray(),
+            NumDocumentsInAllCategories = cat_result.Sum(g => g.NumDocumentsInThisCategory),
+            TotalSizeInAllCategories = cat_result.Sum(g => g.TotalSizeInThisCategory)
+         };
          return Ok(report);
       }
+
+
 
       /*
       // PUT api/<UploadsReportController>/5
